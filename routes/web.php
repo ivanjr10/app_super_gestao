@@ -35,16 +35,16 @@ Route::get('/', 'PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
-Route::get('/login', function(){ return 'login';})->name('site.login');
+Route::get('/login{erro?}', 'LoginController@index')->name('site.login');
+Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
 // Prefix serve para agrupar rotas e separalas por exemplo parte publica e parte privada do app
 Route::middleware('autenticacao:padrao,visitante,p2,p3')->prefix('/app')->group(function(){
-    Route::get('/clientes', function(){ return 'clientes';})
-        ->name('app.clientes');
-    Route::get('/fornecedores', 'FornecedorController@index')
-        ->name('app.fornecedores');
-    Route::get('/produtos', function(){ return 'produtos';})
-        ->name('app.produtos');
+    Route::get('/home', 'homeController@index')->name('app.home');
+    Route::get('/sair', 'LoginController@sair')->name('app.sair');
+    Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
+    Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
+    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');

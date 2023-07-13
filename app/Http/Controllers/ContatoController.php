@@ -29,7 +29,7 @@ class ContatoController extends Controller
         // $contato = new SiteContato();
         // $contato->create($request->all());
 
-        return view('site.contato', ['titulo' => 'Contato (teste)', 'motivo_contatos' => $motivo_contatos]);
+        return view('site.contato', ['titulo' => 'Contato', 'motivo_contatos' => $motivo_contatos]);
     }
 
     public function salvar(Request $request){
